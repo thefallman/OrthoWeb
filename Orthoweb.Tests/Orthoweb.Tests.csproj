@@ -7,13 +7,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\com.orthofeet.EntityFramework\com.orthofeet.EntityFramework.csproj" />
+    <ProjectReference Include="..\com.orthofeet.Mappings\com.orthofeet.Mappings.csproj" />
+    <ProjectReference Include="..\com.orthofeet.Repositories.Interfaces\com.orthofeet.Repositories.Interfaces.csproj" />
+    <ProjectReference Include="..\com.orthofeet.Repositories\com.orthofeet.Repositories.csproj" />
+    <ProjectReference Include="..\com.orthofeet.Services.Interfaces\com.orthofeet.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\com.orthofeet.Services\com.orthofeet.Services.csproj" />
   </ItemGroup>
 
 </Project>

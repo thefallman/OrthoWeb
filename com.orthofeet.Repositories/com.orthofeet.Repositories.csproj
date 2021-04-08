@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\com.orthofeet.EntityFramework\com.orthofeet.EntityFramework.csproj" />
+    <ProjectReference Include="..\com.orthofeet.Repositories.Interfaces\com.orthofeet.Repositories.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>
