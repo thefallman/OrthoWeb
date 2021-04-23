@@ -2,7 +2,7 @@
 
 namespace com.orthofeet.Mappings
 {
-    public class X3SageMappingProfile
+    public class X3SageMappingProfile: OfApiProfile
     {
     }
 }

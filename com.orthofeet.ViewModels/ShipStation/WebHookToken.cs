@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace com.orthofeet.ViewModels.Shopify
+namespace com.orthofeet.ViewModels.ShipStation
 {
 	public class WebHookToken
 	{

@@ -1,0 +1,103 @@
+﻿using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using com.orthofeet.Shopify.Entities;
+using com.orthofeet.Shopify.Filters;
+using com.orthofeet.Shopify.Infrastructure;
+using com.orthofeet.Shopify.Lists;
+
+namespace com.orthofeet.Shopify.Services.CustomCollection
+{
+    /// <summary>
+    /// A service for manipulating mapping between custom collections and collections
+    /// </summary>
+    public class CustomCollectionService : ShopifyService
+    {
+        /// <param name="myShopifyUrl">The shop's *.myshopify.com URL.</param>
+        /// <param name="shopAccessToken">An API access token for the shop.</param>
+        public CustomCollectionService(string myShopifyUrl, string shopAccessToken) : base(myShopifyUrl, shopAccessToken) { }
+
+        /// <summary>
+        /// Gets a list of up to 250 custom collections.
+        /// </summary>
+        public virtual async Task<ListResult<Entities.CustomCollection>> ListAsync(ListFilter<Entities.CustomCollection> filter = null, CancellationToken cancellationToken = default)
+        {
+            return await ExecuteGetListAsync("custom_collections.json", "custom_collections", filter, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets a list of up to 250 custom collections.
+        /// </summary>
+        public virtual async Task<ListResult<Entities.CustomCollection>> ListAsync(CustomCollectionListFilter filter, CancellationToken cancellationToken = default)
+        {
+            return await ListAsync(filter?.AsListFilter(), cancellationToken);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="CustomCollection"/> Custom Collection
+        /// </summary>
+        /// <param name="customCollection">A new <see cref="CustomCollection"/>. Id should be set to null.</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>The new <see cref="CustomCollection"/>.</returns>
+        public virtual async Task<Entities.CustomCollection> CreateAsync(Entities.CustomCollection customCollection, CancellationToken cancellationToken = default)
+        {
+            var req = PrepareRequest("custom_collections.json");
+            var content = new JsonContent(new
+            {
+                custom_collection = customCollection
+            });
+
+            var response = await ExecuteRequestAsync<Entities.CustomCollection>(req, HttpMethod.Post, cancellationToken, content, "custom_collection");
+            
+            return response.Result;
+        }
+
+        public virtual async Task<int> CountAsync(CustomCollectionCountFilter filter = null, CancellationToken cancellationToken = default)
+        {
+            return await ExecuteGetAsync<int>("custom_collections/count.json", "count", filter, cancellationToken);
+        }
+        
+        /// <summary>
+        /// Retrieves the <see cref="CustomCollection"/> with the given id.
+        /// </summary>
+        /// <param name="customCollectionId">The id of the custom collection to retrieve.</param>
+        /// <param name="fields">A comma-separated list of fields to return.</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>The <see cref="CustomCollection"/>.</returns>
+        public virtual async Task<Entities.CustomCollection> GetAsync(long customCollectionId, string fields = null, CancellationToken cancellationToken = default)
+        {
+            return await ExecuteGetAsync<Entities.CustomCollection>($"custom_collections/{customCollectionId}.json", "custom_collection", fields, cancellationToken);
+        }
+
+        /// <summary>
+        /// Deletes a custom collection with the given Id.
+        /// </summary>
+        /// <param name="customCollectionId">The custom collection's Id.</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        public virtual async Task DeleteAsync(long customCollectionId, CancellationToken cancellationToken = default)
+        {
+            var req = PrepareRequest($"custom_collections/{customCollectionId}.json");
+
+            await ExecuteRequestAsync(req, HttpMethod.Delete, cancellationToken);
+        }
+
+        /// <summary>
+        /// Updates the given <see cref="CustomCollection"/>.
+        /// </summary>
+        /// <param name="customCollectionId">Id of the object being updated.</param>
+        /// <param name="customCollection">The <see cref="CustomCollection"/> to update.</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>The updated <see cref="CustomCollection"/>.</returns>
+        public virtual async Task<Entities.CustomCollection> UpdateAsync(long customCollectionId, Entities.CustomCollection customCollection, CancellationToken cancellationToken = default)
+        {
+            var req = PrepareRequest($"custom_collections/{customCollectionId}.json");
+            var content = new JsonContent(new
+            {
+                custom_collection = customCollection
+            });
+
+            var response = await ExecuteRequestAsync<Entities.CustomCollection>(req, HttpMethod.Put, cancellationToken, content, "custom_collection");
+            return response.Result;
+        }
+    }
+}

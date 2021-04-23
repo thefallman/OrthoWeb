@@ -8,6 +8,7 @@ namespace com.orthofeet.Services
 		protected readonly ILogger Logger =  LogManager.GetCurrentClassLogger();
 		protected readonly IAppSettingsService AppSettingsService;
 
+
 		protected ServiceBase(IAppSettingsService appSettingsService )
 		{
 			AppSettingsService = appSettingsService;

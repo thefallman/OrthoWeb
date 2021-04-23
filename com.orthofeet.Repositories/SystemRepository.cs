@@ -15,17 +15,18 @@ namespace com.orthofeet.Repositories
 		{
 			_context = context;
 		}
+
 		#region App Settings
 
-		public async Task<ICollection<AppSetting>> GetAppSettings(string realm)
+		public async Task<ICollection<AppSetting>> GetAppSettings(string appName, string realm)
 		{
-			return await _context.AppSettings.Where(s => s.Realm == realm).ToListAsync();
+			return await _context.AppSettings.Where(s => s.AppName == appName && s.Realm == realm).ToListAsync();
 		}
 
 
-		public async Task<AppSetting> GetAppSettingsEntry(string realm, string name)
+		public async Task<AppSetting> GetAppSettingsEntry(string appName, string realm, string name)
 		{
-			return await _context.AppSettings.FirstOrDefaultAsync(s => s.Realm == realm && s.Name == name);
+			return await _context.AppSettings.FirstOrDefaultAsync(s => s.AppName == appName && s.Realm == realm && s.Name == name);
 		}
 
 		#endregion App Settings

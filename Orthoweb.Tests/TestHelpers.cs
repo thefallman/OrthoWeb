@@ -5,6 +5,7 @@ namespace Orthoweb.Tests
     public class TestConfiguration
     {
         public string SageX3ConnectionString { get; set; }
+        public string OfApiConnectionString { get; set; }
     }
 
 

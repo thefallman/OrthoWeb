@@ -1,4 +1,4 @@
-﻿namespace com.orthofeet.ViewModels.Shipstation
+﻿namespace com.orthofeet.ViewModels.ShipStation
 {
 /*    public class Product
     {

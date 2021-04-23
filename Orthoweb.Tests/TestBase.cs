@@ -7,8 +7,11 @@ using com.orthofeet.Repositories.Interfaces;
 using com.orthofeet.Services;
 using com.orthofeet.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualStudio.TestPlatform.Common.Interfaces;
 using NUnit.Framework;
+using OrthoWeb;
 
 namespace Orthoweb.Tests
 {
@@ -42,16 +45,17 @@ namespace Orthoweb.Tests
 	            });
             }, ServiceLifetime.Transient);
             
+            
+            services.AddDbContext<OfApiDbContext>(builder =>
+            {
+	            builder.UseSqlServer(config.OfApiConnectionString, opt =>
+	            {
+		            opt.EnableRetryOnFailure();
+		            opt.CommandTimeout(15);
+	            });
+            }, ServiceLifetime.Transient);
 
-
-
-            var amAssembly = Assembly.GetAssembly(typeof(X3SageMappingProfile));
-            services.AddAutoMapper(amAssembly);
-            services.AddTransient<IOrderingRepository, OrderingRepository>();
-            services.AddTransient<IInventoryRepository, InventoryRepository>();
-            services.AddTransient<IReferenceRepository, ReferenceRepository>();
-            services.AddTransient<IShopifyService, ShopifyService>();
-
+            DiRegistrar.InjectDependencies(services, iConfig);
             ServiceProvider = services.BuildServiceProvider();
         }
     }

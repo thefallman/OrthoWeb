@@ -1,4 +1,6 @@
-﻿namespace com.orthofeet.Entities.ofapi
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace com.orthofeet.Entities.ofapi
 {
 	public class AppSetting
 	{

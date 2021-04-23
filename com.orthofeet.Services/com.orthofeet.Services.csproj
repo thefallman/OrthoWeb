@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="NLog" Version="4.7.9" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\com.orthofeet.Repositories.Interfaces\com.orthofeet.Repositories.Interfaces.csproj" />
     <ProjectReference Include="..\com.orthofeet.Services.Interfaces\com.orthofeet.Services.Interfaces.csproj" />
   </ItemGroup>
 

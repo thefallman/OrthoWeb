@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using com.orthofeet.Services.Interfaces;
-using com.orthofeet.ViewModels.Shopify;
+using com.orthofeet.ViewModels.ShipStation;
 
 namespace OrthoWep.Api.Controllers
 {

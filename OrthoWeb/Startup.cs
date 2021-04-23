@@ -1,18 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using com.orthofeet.Mappings;
 using com.orthofeet.Repositories;
 using com.orthofeet.Repositories.Interfaces;
-using AutoMapper;
 using com.orthofeet.EntityFramework;
 using com.orthofeet.Services;
 using com.orthofeet.Services.Interfaces;
@@ -37,7 +31,7 @@ namespace OrthoWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-	        InjectDependencies(services);
+	        DiRegistrar.InjectDependencies(services, Configuration);
 	        InitEf(services);
             services.AddControllers();
             services.AddCors(options =>
@@ -65,7 +59,7 @@ namespace OrthoWeb
                 app.UseHsts();
             }
 
-           // app.ConfigureExceptionHandler(_logger);
+            // app.ConfigureExceptionHandler(_logger);
             app.UseRouting();
 
             //app.UseAuthorization();
@@ -97,14 +91,21 @@ namespace OrthoWeb
 		        });
 	        }, ServiceLifetime.Transient);
         }
+    }
 
-
-        private void InjectDependencies(IServiceCollection services)
-        {
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(GlobalMapper)));
-            services.AddSingleton(Configuration);
-            services.AddTransient<ISystemRepository, SystemRepository>();
-            services.AddTransient<IShipStationService, ShipStationService>();
-        }
+    public static class DiRegistrar
+    {
+	    public static void InjectDependencies(IServiceCollection services, IConfiguration configuration)
+	    {
+		    if (configuration != null) services.AddSingleton(configuration); 
+		    services.AddAutoMapper(Assembly.GetAssembly(typeof(GlobalMapper)));
+		    services.AddTransient<IOrderingRepository, OrderingRepository>();
+		    services.AddTransient<IInventoryRepository, InventoryRepository>();
+		    services.AddTransient<IReferenceRepository, ReferenceRepository>();
+		    services.AddTransient<IShopifyService, ShopifyService>();
+		    services.AddTransient<ISystemRepository, SystemRepository>();
+		    services.AddTransient<IShipStationService, ShipStationService>();
+		    services.AddTransient<IAppSettingsService, AppSettingsService>();
+	    }
     }
 }

@@ -39,6 +39,7 @@
     <ProjectReference Include="..\com.orthofeet.Repositories\com.orthofeet.Repositories.csproj" />
     <ProjectReference Include="..\com.orthofeet.Services.Interfaces\com.orthofeet.Services.Interfaces.csproj" />
     <ProjectReference Include="..\com.orthofeet.Services\com.orthofeet.Services.csproj" />
+    <ProjectReference Include="..\OrthoWeb\OrthoWeb.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ namespace com.orthofeet.Repositories.Interfaces
 {
 	public interface ISystemRepository
 	{
-		Task<ICollection<AppSetting>> GetAppSettings(string realm);
-		Task<AppSetting> GetAppSettingsEntry(string realm, string name);
+		Task<ICollection<AppSetting>> GetAppSettings(string appName, string realm);
+		Task<AppSetting> GetAppSettingsEntry(string appName, string realm, string name);
 	}
 }
