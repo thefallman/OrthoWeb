@@ -29,5 +29,12 @@ namespace Orthoweb.Tests
             var result = Task.Run(async () => await repo.GetOrderDetail("SO1107675")).GetAwaiter().GetResult();
             Assert.IsNotNull(result);
         }
+        [Test]
+        public void CreateOrderHeader()
+        {
+	        var repo = ServiceProvider.GetRequiredService<IOrderingRepository>();
+	        var result = repo.CreateOrder("ZPO0000001");
+	        Assert.IsNotNull(result);
+        }
     }
 }

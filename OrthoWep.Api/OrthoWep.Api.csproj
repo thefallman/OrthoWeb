@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AspNetCoreHostingModel>OutofProcess</AspNetCoreHostingModel>
+    <UserSecretsId>3eb94d63-c7db-4d00-bfc9-02235d281a1c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\com.orthofeet.Services.Interfaces\com.orthofeet.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\com.orthofeet.ViewModels\com.orthofeet.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

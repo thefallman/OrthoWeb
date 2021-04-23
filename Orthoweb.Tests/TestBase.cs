@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using com.orthofeet.Entities;
 using com.orthofeet.EntityFramework;
 using com.orthofeet.Mappings;
 using com.orthofeet.Repositories;
@@ -23,7 +24,7 @@ namespace Orthoweb.Tests
             var services = new ServiceCollection();
             services.AddSingleton(iConfig);
             services.AddSingleton(config);
-            services.AddDbContext<X3SageDbContext>(builder =>
+            services.AddDbContext<SageX3Context>(builder =>
             {
                 builder.UseSqlServer(config.SageX3ConnectionString, opt =>
                 {
@@ -31,6 +32,18 @@ namespace Orthoweb.Tests
                     opt.CommandTimeout(15);
                 });
             }, ServiceLifetime.Transient);
+
+            services.AddDbContext<X3SageDbContext>(builder =>
+            {
+	            builder.UseSqlServer(config.SageX3ConnectionString, opt =>
+	            {
+		            opt.EnableRetryOnFailure();
+		            opt.CommandTimeout(15);
+	            });
+            }, ServiceLifetime.Transient);
+            
+
+
 
             var amAssembly = Assembly.GetAssembly(typeof(X3SageMappingProfile));
             services.AddAutoMapper(amAssembly);

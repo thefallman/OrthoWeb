@@ -9,7 +9,7 @@ namespace com.orthofeet.Services
     /// <summary>
     /// Private App Name: OrthoShopify API Gateway
     /// </summary>
-    public class ShopifyService: IShopifyService
+    public class ShopifyService: ServiceBase, IShopifyService
     {
         private const string API_KEY = "55828496ba355581cf24ec534b6e8885";
         private const string API_PASS = "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";
